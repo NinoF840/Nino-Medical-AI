@@ -57,7 +57,6 @@ You can easily use this model with the Hugging Face `transformers` library. Here
 
 ```python
 from transformers import AutoTokenizer, AutoModelForTokenClassification
-import torch
 
 model_name = "rigonsallauka/italian_medical_ner"
 
