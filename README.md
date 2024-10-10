@@ -46,6 +46,12 @@ tags:
   - **Loss Function**: Focal Loss to handle class imbalance
 - **Frameworks**: PyTorch, Hugging Face Transformers, SimpleTransformers
 
+## Evaluation metrics
+- eval_loss = 0.3371218325682951
+- f1_score = 0.7559515712148007
+- precision = 0.759089632772006
+- recall = 0.7528393482105897
+
 ## How to Use
 You can easily use this model with the Hugging Face `transformers` library. Here's an example of how to load and use the model for inference:
 
