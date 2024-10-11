@@ -1,9 +1,8 @@
 ---
 license: apache-2.0
 datasets:
-- rigonsallauka/italian_ner_dataset
+- HUMADEX/italian_ner_dataset
 language:
-
 - it
 metrics:
 - f1
@@ -68,7 +67,7 @@ You can easily use this model with the Hugging Face `transformers` library. Here
 ```python
 from transformers import AutoTokenizer, AutoModelForTokenClassification
 
-model_name = "rigonsallauka/italian_medical_ner"
+model_name = "HUMADEX/italian_medical_ner"
 
 # Load the tokenizer and model
 tokenizer = AutoTokenizer.from_pretrained(model_name)
