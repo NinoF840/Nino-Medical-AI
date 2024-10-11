@@ -21,6 +21,11 @@ tags:
 ---
 # Italian Medical NER
 
+Acknowledgement
+This model had been created as part of joint research of HUMADEX research group (https://www.linkedin.com/company/101563689/) and has received funding by the European Union Horizon Europe Research and Innovation Program project SMILE (grant number 101080923) and Marie Skłodowska-Curie Actions (MSCA) Doctoral Networks, project BosomShield ((rant number 101073222). Responsibility for the information and views expressed herein lies entirely with the authors.
+Authors:
+dr. Izidor Mlakar, Rigon Sallauka, dr. Umut Arioz, dr. Matej Rojc
+
 ## Use
 - **Primary Use Case**: This model is designed to extract medical entities such as symptoms, diagnostic tests, and treatments from clinical text in the Italian language.
 - **Applications**: Suitable for healthcare professionals, clinical data analysis, and research into medical text processing.
