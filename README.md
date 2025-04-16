@@ -28,7 +28,7 @@ Authors:
 dr. Izidor Mlakar, Rigon Sallauka, dr. Umut Arioz, dr. Matej Rojc
 
 ## Preprint
-The preprint version of the paper associated with this code is available at:
+The preprint version of the paper associated with this model is available at:
 [Preprint DOI: 10.20944/preprints202504.1356.v1](https://www.preprints.org/manuscript/202504.1356/v1)
 
 ## Use
