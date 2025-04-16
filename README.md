@@ -27,6 +27,10 @@ This model had been created as part of joint research of HUMADEX research group 
 Authors:
 dr. Izidor Mlakar, Rigon Sallauka, dr. Umut Arioz, dr. Matej Rojc
 
+## Preprint
+The preprint version of the paper associated with this code is available at:
+[Preprint DOI: 10.20944/preprints202504.1356.v1](https://www.preprints.org/manuscript/202504.1356/v1)
+
 ## Use
 - **Primary Use Case**: This model is designed to extract medical entities such as symptoms, diagnostic tests, and treatments from clinical text in the Italian language.
 - **Applications**: Suitable for healthcare professionals, clinical data analysis, and research into medical text processing.
