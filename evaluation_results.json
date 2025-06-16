@@ -1,0 +1,25 @@
+{
+  "summary": {
+    "total_sentences": 10,
+    "original_total_entities": 58,
+    "enhanced_total_entities": 47,
+    "average_original_time": 0.08339664936065674,
+    "average_enhanced_time": 0.17359519004821777,
+    "improvements_by_type": {
+      "PROBLEM": -9,
+      "TREATMENT": -2,
+      "TEST": 0
+    },
+    "new_detections_total": 35,
+    "missed_detections_total": 45
+  },
+  "detailed_results": [
+    {
+      "sentence_id": 1,
+      "text": "Il paziente presenta forti mal di testa e nausea persistente da tre giorni.",
+      "original_result": {
+        "entities": [
+          {
+            "text": "fort",
+            "label": "PROBLEM",
+            "confidence": 
