@@ -1,0 +1,16 @@
+# Core dependencies for Italian Medical NER
+torch>=1.9.0
+transformers>=4.20.0
+numpy>=1.21.0
+cx_Freeze>=6.13.1
+
+# Optional dependencies (already included in most Python installations)
+# tkinter (usually comes with Python)
+# threading (built-in)
+# json (built-in)
+# datetime (built-in)
+# os (built-in)
+# sys (built-in)
+# re (built-in)
+# collections (built-in)
+
