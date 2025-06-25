@@ -60,3 +60,27 @@ logs/
 # *.bin
 # *.safetensors
 
+# Database files
+*.db
+*.sqlite
+*.sqlite3
+
+# Analytics and export files
+*analytics_export*.json
+*daily_report*.txt
+*monitoring_schedule*.json
+
+# Binary images (use Git LFS for images)
+*.png
+*.jpg
+*.jpeg
+*.gif
+*.bmp
+
+# JDK installations
+OpenJDK*/
+
+# Large directories that might contain binaries
+Issue/
+Medico-Italiano-IA/output/
+

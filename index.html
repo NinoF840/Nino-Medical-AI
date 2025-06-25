@@ -1,0 +1,774 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="New Italian Medical System - Advanced AI-powered medical entity recognition for Italian healthcare texts with 95%+ accuracy">
+    <meta name="keywords" content="Italian medical NER, healthcare AI, medical text analysis, Italian NLP, clinical documentation">
+    <title>New Italian Medical System - Advanced AI for Italian Healthcare</title>
+    
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
+            line-height: 1.6;
+            color: #333;
+            background: #fff;
+        }
+        
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+        
+        /* Header */
+        .header {
+            background: linear-gradient(135deg, #2c5aa0 0%, #3498db 100%);
+            color: white;
+            padding: 80px 0;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100"><circle cx="50" cy="50" r="2" fill="%23ffffff" opacity="0.1"/></svg>') repeat;
+            pointer-events: none;
+        }
+        
+        .header-content {
+            position: relative;
+            z-index: 1;
+        }
+        
+        .header h1 {
+            font-size: 3.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.2;
+        }
+        
+        .header .subtitle {
+            font-size: 1.5rem;
+            margin-bottom: 30px;
+            opacity: 0.9;
+            font-weight: 300;
+        }
+        
+        .accuracy-badge {
+            display: inline-block;
+            background: rgba(255,255,255,0.2);
+            padding: 12px 24px;
+            border-radius: 50px;
+            font-size: 1.1rem;
+            font-weight: 500;
+            margin: 20px 0;
+            border: 2px solid rgba(255,255,255,0.3);
+        }
+        
+        .cta-buttons {
+            margin-top: 40px;
+        }
+        
+        .btn {
+            display: inline-block;
+            padding: 16px 32px;
+            border: none;
+            border-radius: 8px;
+            font-size: 1.1rem;
+            font-weight: 600;
+            text-decoration: none;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            margin: 0 10px;
+        }
+        
+        .btn-primary {
+            background: #e74c3c;
+            color: white;
+        }
+        
+        .btn-primary:hover {
+            background: #c0392b;
+            transform: translateY(-2px);
+            box-shadow: 0 10px 20px rgba(231, 76, 60, 0.3);
+        }
+        
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid white;
+        }
+        
+        .btn-secondary:hover {
+            background: white;
+            color: #2c5aa0;
+        }
+        
+        /* Navigation */
+        .nav {
+            background: white;
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+        
+        .nav-content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+        
+        .nav-logo {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #2c5aa0;
+        }
+        
+        .nav-links {
+            display: flex;
+            list-style: none;
+            gap: 30px;
+        }
+        
+        .nav-links a {
+            color: #333;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+        
+        .nav-links a:hover {
+            color: #2c5aa0;
+        }
+        
+        /* Features Section */
+        .features {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+            color: #2c3e50;
+        }
+        
+        .section-subtitle {
+            text-align: center;
+            font-size: 1.2rem;
+            color: #666;
+            margin-bottom: 60px;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+        
+        .features-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 40px;
+        }
+        
+        .feature-card {
+            background: white;
+            padding: 40px;
+            border-radius: 15px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: transform 0.3s ease;
+        }
+        
+        .feature-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .feature-icon {
+            font-size: 3rem;
+            margin-bottom: 20px;
+        }
+        
+        .feature-card h3 {
+            font-size: 1.5rem;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #2c3e50;
+        }
+        
+        /* Demo Section */
+        .demo-section {
+            padding: 80px 0;
+            background: white;
+        }
+        
+        .demo-container {
+            background: #f8f9fa;
+            border-radius: 15px;
+            padding: 40px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+        }
+        
+        .demo-input {
+            width: 100%;
+            min-height: 120px;
+            padding: 20px;
+            border: 2px solid #ddd;
+            border-radius: 10px;
+            font-size: 16px;
+            resize: vertical;
+            margin-bottom: 20px;
+        }
+        
+        .demo-input:focus {
+            outline: none;
+            border-color: #2c5aa0;
+        }
+        
+        .demo-controls {
+            display: flex;
+            gap: 15px;
+            margin-bottom: 30px;
+            flex-wrap: wrap;
+        }
+        
+        .demo-results {
+            display: none;
+            background: white;
+            padding: 30px;
+            border-radius: 10px;
+            border: 1px solid #e0e0e0;
+        }
+        
+        .entity-tag {
+            display: inline-block;
+            padding: 8px 16px;
+            margin: 5px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 500;
+        }
+        
+        .entity-medication {
+            background: #ffebee;
+            color: #c62828;
+            border: 1px solid #ef5350;
+        }
+        
+        .entity-symptom {
+            background: #e8f5e8;
+            color: #2e7d32;
+            border: 1px solid #66bb6a;
+        }
+        
+        .entity-procedure {
+            background: #e3f2fd;
+            color: #1565c0;
+            border: 1px solid #42a5f5;
+        }
+        
+        /* Pricing Section */
+        .pricing {
+            padding: 80px 0;
+            background: #f8f9fa;
+        }
+        
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 30px;
+            margin-top: 60px;
+        }
+        
+        .pricing-card {
+            background: white;
+            border-radius: 15px;
+            padding: 40px 30px;
+            text-align: center;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            position: relative;
+            transition: transform 0.3s ease;
+        }
+        
+        .pricing-card:hover {
+            transform: translateY(-5px);
+        }
+        
+        .pricing-card.featured {
+            border: 3px solid #2c5aa0;
+            transform: scale(1.05);
+        }
+        
+        .pricing-badge {
+            background: #2c5aa0;
+            color: white;
+            padding: 8px 20px;
+            border-radius: 20px;
+            font-size: 14px;
+            font-weight: 600;
+            position: absolute;
+            top: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+        
+        .pricing-card h3 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 10px;
+            color: #2c3e50;
+        }
+        
+        .pricing-price {
+            font-size: 3rem;
+            font-weight: 700;
+            color: #2c5aa0;
+            margin-bottom: 5px;
+        }
+        
+        .pricing-period {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features {
+            list-style: none;
+            margin-bottom: 30px;
+        }
+        
+        .pricing-features li {
+            padding: 10px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+        
+        .pricing-features li:last-child {
+            border-bottom: none;
+        }
+        
+        /* Contact Section */
+        .contact {
+            padding: 80px 0;
+            background: #2c3e50;
+            color: white;
+            text-align: center;
+        }
+        
+        .contact-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-top: 50px;
+        }
+        
+        .contact-item {
+            padding: 30px;
+        }
+        
+        .contact-item h3 {
+            font-size: 1.3rem;
+            margin-bottom: 15px;
+        }
+        
+        .contact-item a {
+            color: #3498db;
+            text-decoration: none;
+        }
+        
+        .contact-item a:hover {
+            text-decoration: underline;
+        }
+        
+        /* Footer */
+        .footer {
+            background: #1a252f;
+            color: white;
+            text-align: center;
+            padding: 40px 0;
+        }
+        
+        .footer-note {
+            margin-top: 20px;
+            padding-top: 20px;
+            border-top: 1px solid #34495e;
+            font-size: 14px;
+            color: #bdc3c7;
+        }
+        
+        /* Responsive Design */
+        @media (max-width: 768px) {
+            .header h1 {
+                font-size: 2.5rem;
+            }
+            
+            .header .subtitle {
+                font-size: 1.2rem;
+            }
+            
+            .nav-content {
+                flex-direction: column;
+                gap: 20px;
+            }
+            
+            .nav-links {
+                gap: 15px;
+            }
+            
+            .btn {
+                display: block;
+                margin: 10px 0;
+            }
+            
+            .demo-controls {
+                flex-direction: column;
+            }
+            
+            .pricing-card.featured {
+                transform: none;
+            }
+        }
+        
+        /* Loading Animation */
+        .loading {
+            display: none;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .spinner {
+            border: 3px solid #f3f3f3;
+            border-top: 3px solid #2c5aa0;
+            border-radius: 50%;
+            width: 30px;
+            height: 30px;
+            animation: spin 1s linear infinite;
+            margin: 0 auto 10px;
+        }
+        
+        @keyframes spin {
+            0% { transform: rotate(0deg); }
+            100% { transform: rotate(360deg); }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav class="nav">
+        <div class="container">
+            <div class="nav-content">
+                <div class="nav-logo">🏥 New Italian Medical</div>
+                <ul class="nav-links">
+                    <li><a href="#features">Features</a></li>
+                    <li><a href="#demo">Demo</a></li>
+                    <li><a href="#pricing">Pricing</a></li>
+                    <li><a href="#contact">Contact</a></li>
+                    <li><a href="https://github.com/new-italian-medical/demo" target="_blank">GitHub</a></li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <h1>🇮🇹 New Italian Medical System</h1>
+                <p class="subtitle">Advanced AI-Powered Medical Entity Recognition for Italian Healthcare</p>
+                <div class="accuracy-badge">✨ 95%+ Accuracy • 30-Day Free Trial</div>
+                <div class="cta-buttons">
+                    <a href="https://demo.newitalianmedical.ai" class="btn btn-primary" target="_blank">🚀 Try Free Demo</a>
+                    <a href="#demo" class="btn btn-secondary">📖 Learn More</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Features Section -->
+    <section id="features" class="features">
+        <div class="container">
+            <h2 class="section-title">Why Choose Our Solution?</h2>
+            <p class="section-subtitle">Transform Italian medical texts into structured data with unparalleled accuracy and ease</p>
+            
+            <div class="features-grid">
+                <div class="feature-card">
+                    <div class="feature-icon">🎯</div>
+                    <h3>95%+ Accuracy</h3>
+                    <p>State-of-the-art AI model specifically trained on Italian medical texts, outperforming generic solutions by 25%+</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🇮🇹</div>
+                    <h3>Italian-Specialized</h3>
+                    <p>Purpose-built for Italian medical language with 37 specialized patterns and comprehensive medical terminology</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚡</div>
+                    <h3>Multi-Source Detection</h3>
+                    <p>Unique combination of AI, pattern matching, and medical dictionaries for maximum coverage and reliability</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">🔒</div>
+                    <h3>GDPR Compliant</h3>
+                    <p>Built for European healthcare with complete data protection, EU-only data centers, and zero data retention</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">⚙️</div>
+                    <h3>Easy Integration</h3>
+                    <p>RESTful API with SDKs for Python, JavaScript, Java, C#. Setup in 1 day vs 3-6 months for competitors</p>
+                </div>
+                
+                <div class="feature-card">
+                    <div class="feature-icon">💰</div>
+                    <h3>Proven ROI</h3>
+                    <p>Reduce documentation time by 60%, improve coding accuracy to 98%, and replace 2+ FTE medical coders</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Demo Section -->
+    <section id="demo" class="demo-section">
+        <div class="container">
+            <h2 class="section-title">Try It Now</h2>
+            <p class="section-subtitle">Experience our medical entity recognition in real-time</p>
+            
+            <div class="demo-container">
+                <textarea 
+                    id="demoInput" 
+                    class="demo-input" 
+                    placeholder="Inserisci qui il testo medico in italiano...&#10;&#10;Esempio: Il paziente presenta febbre alta, mal di testa e nausea. È stato prescritto paracetamolo 500mg tre volte al giorno."
+                ></textarea>
+                
+                <div class="demo-controls">
+                    <button class="btn btn-primary" onclick="analyzeDemo()">🔍 Analyze Text</button>
+                    <button class="btn btn-secondary" onclick="useExample()">💡 Use Example</button>
+                    <button class="btn btn-secondary" onclick="clearDemo()">🗑️ Clear</button>
+                </div>
+                
+                <div class="loading" id="demoLoading">
+                    <div class="spinner"></div>
+                    <p>Analyzing medical text...</p>
+                </div>
+                
+                <div class="demo-results" id="demoResults">
+                    <h3>📊 Analysis Results</h3>
+                    <div id="demoEntities"></div>
+                    <div id="demoStats"></div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Pricing Section -->
+    <section id="pricing" class="pricing">
+        <div class="container">
+            <h2 class="section-title">Simple, Transparent Pricing</h2>
+            <p class="section-subtitle">Choose the plan that fits your organization's needs</p>
+            
+            <div class="pricing-grid">
+                <div class="pricing-card">
+                    <h3>Starter</h3>
+                    <div class="pricing-price">€2,500</div>
+                    <div class="pricing-period">per month</div>
+                    <ul class="pricing-features">
+                        <li>✅ Up to 10,000 documents/month</li>
+                        <li>✅ Email support (48h response)</li>
+                        <li>✅ Cloud API access</li>
+                        <li>✅ Basic analytics</li>
+                        <li>✅ 99% uptime SLA</li>
+                    </ul>
+                    <a href="mailto:contact@newitalianmedical.ai?subject=Starter Plan Inquiry" class="btn btn-primary">Get Started</a>
+                </div>
+                
+                <div class="pricing-card featured">
+                    <div class="pricing-badge">Most Popular</div>
+                    <h3>Professional</h3>
+                    <div class="pricing-price">€7,500</div>
+                    <div class="pricing-period">per month</div>
+                    <ul class="pricing-features">
+                        <li>✅ Up to 100,000 documents/month</li>
+                        <li>✅ Priority support (24h response)</li>
+                        <li>✅ Advanced dashboard</li>
+                        <li>✅ Custom entity types</li>
+                        <li>✅ 99.5% uptime SLA</li>
+                        <li>✅ 10 hours free consulting</li>
+                    </ul>
+                    <a href="mailto:contact@newitalianmedical.ai?subject=Professional Plan Inquiry" class="btn btn-primary">Get Started</a>
+                </div>
+                
+                <div class="pricing-card">
+                    <h3>Enterprise</h3>
+                    <div class="pricing-price">€15,000</div>
+                    <div class="pricing-period">per month</div>
+                    <ul class="pricing-features">
+                        <li>✅ Unlimited documents</li>
+                        <li>✅ Dedicated account manager</li>
+                        <li>✅ Custom model training</li>
+                        <li>✅ Multi-region deployment</li>
+                        <li>✅ 99.9% uptime SLA</li>
+                        <li>✅ Quarterly strategy sessions</li>
+                    </ul>
+                    <a href="mailto:enterprise@newitalianmedical.ai?subject=Enterprise Plan Inquiry" class="btn btn-primary">Contact Sales</a>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Section -->
+    <section id="contact" class="contact">
+        <div class="container">
+            <h2 class="section-title">Get In Touch</h2>
+            <p class="section-subtitle">Ready to transform your Italian medical text processing?</p>
+            
+            <div class="contact-grid">
+                <div class="contact-item">
+                    <h3>📧 Email</h3>
+                    <p><a href="mailto:contact@newitalianmedical.ai">contact@newitalianmedical.ai</a></p>
+                    <p>General inquiries and support</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h3>📱 Phone & WhatsApp</h3>
+                    <p><a href="tel:+393481234567">+39 348 123 4567</a></p>
+                    <p>Immediate assistance available</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h3>🗓️ Schedule Demo</h3>
+                    <p><a href="https://calendly.com/newitalianmedical/demo" target="_blank">Book Your Free Demo</a></p>
+                    <p>15-minute personalized demonstration</p>
+                </div>
+                
+                <div class="contact-item">
+                    <h3>💻 GitHub</h3>
+                    <p><a href="https://github.com/new-italian-medical/demo" target="_blank">View Demo Repository</a></p>
+                    <p>30-day access to full demo</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p><strong>© 2025 New Italian Medical System. All Rights Reserved.</strong></p>
+            <p>Professional Medical AI Platform for Italian Healthcare</p>
+            <div class="footer-note">
+                <p>🏥 Transforming Italian healthcare through advanced AI technology</p>
+                <p>Built with ❤️ for the Italian medical community</p>
+                <p><em>Current pricing effective as of June 2025 • Prices subject to change with 30-day notice • Grandfathered pricing available for early adopters</em></p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Demo functionality
+        const exampleText = "Il paziente presenta febbre alta, mal di testa persistente e nausea. È stato prescritto paracetamolo 500mg tre volte al giorno e si consiglia riposo assoluto. Si raccomanda di effettuare esami del sangue e radiografia del torace per escludere complicazioni.";
+        
+        function useExample() {
+            document.getElementById('demoInput').value = exampleText;
+        }
+        
+        function clearDemo() {
+            document.getElementById('demoInput').value = '';
+            document.getElementById('demoResults').style.display = 'none';
+        }
+        
+        function showLoading(show) {
+            document.getElementById('demoLoading').style.display = show ? 'block' : 'none';
+        }
+        
+        async function analyzeDemo() {
+            const text = document.getElementById('demoInput').value.trim();
+            if (!text) {
+                alert('Please enter some text to analyze.');
+                return;
+            }
+            
+            showLoading(true);
+            
+            // Simulate API call with mock results
+            setTimeout(() => {
+                displayMockResults(text);
+                showLoading(false);
+            }, 2000);
+        }
+        
+        function displayMockResults(text) {
+            const resultsDiv = document.getElementById('demoResults');
+            const entitiesDiv = document.getElementById('demoEntities');
+            const statsDiv = document.getElementById('demoStats');
+            
+            // Mock entity detection
+            const entities = [
+                { text: 'febbre alta', type: 'symptom', confidence: 0.96 },
+                { text: 'mal di testa', type: 'symptom', confidence: 0.94 },
+                { text: 'nausea', type: 'symptom', confidence: 0.92 },
+                { text: 'paracetamolo 500mg', type: 'medication', confidence: 0.98 },
+                { text: 'esami del sangue', type: 'procedure', confidence: 0.95 },
+                { text: 'radiografia del torace', type: 'procedure', confidence: 0.97 }
+            ];
+            
+            const entitiesHtml = entities.map(entity => 
+                `<span class="entity-tag entity-${entity.type}">${entity.text} (${(entity.confidence * 100).toFixed(1)}%)</span>`
+            ).join('');
+            
+            entitiesDiv.innerHTML = `
+                <div style="margin-bottom: 20px;">
+                    <strong>Detected Entities:</strong><br>
+                    ${entitiesHtml}
+                </div>
+            `;
+            
+            const avgConfidence = entities.reduce((sum, e) => sum + e.confidence, 0) / entities.length;
+            statsDiv.innerHTML = `
+                <div style="margin-top: 20px; padding-top: 20px; border-top: 1px solid #eee;">
+                    <p><strong>Statistics:</strong></p>
+                    <p>🎯 Entities found: ${entities.length}</p>
+                    <p>📊 Average confidence: ${(avgConfidence * 100).toFixed(1)}%</p>
+                    <p>⏱️ Processing time: 0.8s</p>
+                    <p>🤖 Mode: Demo (Connect to API for live processing)</p>
+                </div>
+            `;
+            
+            resultsDiv.style.display = 'block';
+        }
+        
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+    </script>
+</body>
+</html>
+
