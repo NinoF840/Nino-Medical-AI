@@ -84,3 +84,7 @@ OpenJDK*/
 Issue/
 Medico-Italiano-IA/output/
 
+# Embedded git repositories
+Medico-Italiano-IA/
+italian-medical-ner-demo/
+

@@ -1,0 +1,74 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+
+# Virtual environments
+venv/
+ENV/
+env/
+.venv/
+
+# IDE
+.vscode/
+.idea/
+*.swp
+*.swo
+
+# OS
+.DS_Store
+Thumbs.db
+
+# Git
+.git/
+.gitignore
+
+# Documentation and non-essential files
+*.md
+*.txt
+*.log
+analytics_charts/
+Issue/
+.pytest_cache/
+tests/
+monitoring/
+
+# Large model files that should be downloaded instead
+# (uncomment if you want to download models on build)
+# *.bin
+# *.safetensors
+# *.pt
+
+# Demo and development files
+demo_web.html
+mobile_demo.html
+index.html
+visitor_analytics_dashboard.html
+
+# Build and deployment files
+build_exe.bat
+docker-launch.bat
+deploy.bat
+*.bat
+
+# Docker files not needed for Cloud Run
+docker-compose*.yml
+Dockerfile
+!Dockerfile.cloudrun

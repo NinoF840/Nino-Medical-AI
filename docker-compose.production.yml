@@ -1,0 +1,181 @@
+version: '3.8'
+
+services:
+  # Production Streamlit Web Demo with Load Balancer
+  nino-medical-web:
+    build: 
+      context: .
+      dockerfile: Dockerfile.production
+    ports:
+      - "80:8501"    # HTTP
+      - "443:8502"   # HTTPS (if SSL configured)
+    environment:
+      - PYTHONPATH=/app
+      - ENVIRONMENT=production
+      - MAX_CONCURRENT_USERS=100
+      - RATE_LIMIT_PER_MINUTE=60
+      - LOG_LEVEL=INFO
+      - STREAMLIT_SERVER_ENABLE_CORS=false
+      - STREAMLIT_SERVER_ENABLE_XSRF_PROTECTION=true
+    volumes:
+      - ./logs:/app/logs
+      - ./ssl:/app/ssl  # SSL certificates
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 4G
+          cpus: '2.0'
+        reservations:
+          memory: 2G
+          cpus: '1.0'
+      replicas: 2  # Load balancing
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8501/_stcore/health"]
+      interval: 30s
+      timeout: 15s
+      retries: 3
+      start_period: 60s
+    networks:
+      - nino-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nino-web.rule=Host(`your-domain.com`)"
+      - "traefik.http.services.nino-web.loadbalancer.server.port=8501"
+
+  # Production FastAPI Service
+  nino-medical-api:
+    build: 
+      context: .
+      dockerfile: Dockerfile.production
+    command: ["gunicorn", "api_service:app", "-w", "4", "-k", "uvicorn.workers.UvicornWorker", "--bind", "0.0.0.0:8000", "--timeout", "120"]
+    ports:
+      - "8000:8000"
+    environment:
+      - PYTHONPATH=/app
+      - ENVIRONMENT=production
+      - API_KEY_REQUIRED=true
+      - RATE_LIMIT_PER_HOUR=1000
+      - MAX_REQUEST_SIZE=1048576  # 1MB
+      - LOG_LEVEL=INFO
+      - WORKERS=4
+    volumes:
+      - ./logs:/app/logs
+      - ./config:/app/config
+    restart: always
+    deploy:
+      resources:
+        limits:
+          memory: 6G
+          cpus: '3.0'
+        reservations:
+          memory: 3G
+          cpus: '2.0'
+      replicas: 2
+    healthcheck:
+      test: ["CMD", "curl", "-f", "http://localhost:8000/health"]
+      interval: 30s
+      timeout: 15s
+      retries: 3
+      start_period: 60s
+    networks:
+      - nino-network
+    labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.nino-api.rule=Host(`api.your-domain.com`)"
+
+  # Reverse Proxy / Load Balancer (Traefik)
+  traefik:
+    image: traefik:v2.10
+    command:
+      - "--api.dashboard=true"
+      - "--providers.docker=true"
+      - "--providers.docker.exposedbydefault=false"
+      - "--entrypoints.web.address=:80"
+      - "--entrypoints.websecure.address=:443"
+      - "--certificatesresolvers.myresolver.acme.email=your-email@example.com"
+      - "--certificatesresolvers.myresolver.acme.storage=/letsencrypt/acme.json"
+      - "--certificatesresolvers.myresolver.acme.httpchallenge.entrypoint=web"
+    ports:
+      - "80:80"
+      - "443:443"
+      - "8080:8080"  # Traefik dashboard
+    volumes:
+      - /var/run/docker.sock:/var/run/docker.sock:ro
+      - ./letsencrypt:/letsencrypt
+    networks:
+      - nino-network
+    restart: always
+
+  # Redis for Caching and Rate Limiting
+  redis:
+    image: redis:7-alpine
+    ports:
+      - "6379:6379"
+    volumes:
+      - redis_data:/data
+    restart: always
+    networks:
+      - nino-network
+    deploy:
+      resources:
+        limits:
+          memory: 512M
+          cpus: '0.5'
+
+  # PostgreSQL for Analytics and Logging
+  postgres:
+    image: postgres:15-alpine
+    environment:
+      - POSTGRES_DB=nino_medical_analytics
+      - POSTGRES_USER=nino_user
+      - POSTGRES_PASSWORD=secure_password_change_me
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./init-db:/docker-entrypoint-initdb.d
+    restart: always
+    networks:
+      - nino-network
+    deploy:
+      resources:
+        limits:
+          memory: 1G
+          cpus: '1.0'
+
+  # Monitoring with Prometheus
+  prometheus:
+    image: prom/prometheus:latest
+    ports:
+      - "9090:9090"
+    volumes:
+      - ./monitoring/prometheus.yml:/etc/prometheus/prometheus.yml
+      - prometheus_data:/prometheus
+    networks:
+      - nino-network
+    restart: always
+
+  # Grafana for Dashboards
+  grafana:
+    image: grafana/grafana:latest
+    ports:
+      - "3000:3000"
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin123_change_me
+    volumes:
+      - grafana_data:/var/lib/grafana
+      - ./monitoring/grafana:/etc/grafana/provisioning
+    networks:
+      - nino-network
+    restart: always
+
+networks:
+  nino-network:
+    driver: bridge
+
+volumes:
+  redis_data:
+  postgres_data:
+  prometheus_data:
+  grafana_data:

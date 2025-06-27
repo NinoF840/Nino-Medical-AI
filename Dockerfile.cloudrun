@@ -1,0 +1,45 @@
+# Optimized Dockerfile for Google Cloud Run - Italian Medical NER
+FROM python:3.11.7-slim
+
+# Set working directory
+WORKDIR /app
+
+# Install system dependencies
+RUN apt-get update && apt-get install -y \
+    gcc \
+    g++ \
+    wget \
+    curl \
+    && rm -rf /var/lib/apt/lists/*
+
+# Copy requirements first for better caching
+COPY requirements.txt .
+COPY web_demo_requirements.txt .
+COPY api_requirements.txt .
+
+# Install Python dependencies
+RUN pip install --no-cache-dir -r requirements.txt && \
+    pip install --no-cache-dir -r web_demo_requirements.txt && \
+    pip install --no-cache-dir -r api_requirements.txt && \
+    pip install --no-cache-dir streamlit fastapi uvicorn gunicorn
+
+# Copy application files
+COPY . .
+
+# Create logs directory
+RUN mkdir -p logs
+
+# Create non-root user for security
+RUN useradd --create-home --shell /bin/bash app \
+    && chown -R app:app /app
+USER app
+
+# Expose port (Cloud Run will set PORT env variable)
+EXPOSE 8080
+
+# Health check
+HEALTHCHECK --interval=30s --timeout=30s --start-period=5s --retries=3 \
+    CMD curl -f http://localhost:8080/_stcore/health || exit 1
+
+# Command for Cloud Run (uses PORT environment variable)
+CMD streamlit run web_demo_app.py --server.port=$PORT --server.address=0.0.0.0 --server.headless=true

@@ -1,0 +1,22 @@
+runtime: python311
+
+env_variables:
+  ENVIRONMENT: production
+  PYTHONPATH: /app
+  
+# Cloud Run will automatically set PORT environment variable
+# Our Streamlit app will use $PORT which is set by Cloud Run
+
+automatic_scaling:
+  min_instances: 0
+  max_instances: 10
+  target_cpu_utilization: 0.6
+  target_concurrent_requests: 80
+
+resources:
+  cpu: 2
+  memory_gb: 4
+
+vpc_access_connector:
+  # Uncomment and configure if you need VPC access
+  # name: projects/PROJECT_ID/locations/REGION/connectors/CONNECTOR_NAME

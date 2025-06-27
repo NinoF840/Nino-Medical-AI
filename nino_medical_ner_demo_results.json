@@ -1,0 +1,59 @@
+{
+  "model_type": "Enhanced Model",
+  "total_texts": 10,
+  "total_entities": 41,
+  "processing_time": 2.1871113777160645,
+  "analysis": {
+    "total_entities": 41,
+    "label_counts": {
+      "PROBLEM": 23,
+      "TREATMENT": 13,
+      "TEST": 5
+    },
+    "entity_texts": {
+      "fortidolori": 1,
+      "di": 1,
+      "acute": 1,
+      "te": 1,
+      "para": 1,
+      "test": 1,
+      "persistent": 1,
+      "n": 1,
+      "ess": 1,
+      "g": 1,
+      "un": 2,
+      "anti": 2,
+      "biotic": 1,
+      "i": 1,
+      "unel": 1,
+      "l": 1,
+      "'": 1,
+      "a": 1,
+      "rit": 1,
+      "mia": 1,
+      "nausea": 1,
+      "vomit": 1,
+      "o": 2,
+      "delnuovofarm": 1,
+      "inter": 1,
+      "vent": 1,
+      "iltumor": 1,
+      "f": 1,
+      "fi": 1,
+      "ia": 1,
+      "bil": 1,
+      "ana": 1,
+      "positive": 1,
+      "in": 1,
+      "vie": 1,
+      "u": 1,
+      "rina": 1,
+      "tipo2": 1
+    },
+    "avg_confidence": 0.8805478389670209,
+    "confidence_range": [
+      0.6283101439476013,
+      0.9991559982299805
+    ]
+  }
+}

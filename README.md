@@ -117,6 +117,91 @@ With full implementation of suggested improvements:
 
 For more information, visit [Nino Medical AI](https://ninomedical.ai) or contact us at contact@ninomedical.ai.
 
+## 🚀 Quick Start
+
+### 1. 🌐 Try Live Demo (Fastest Way!)
+**Experience the power immediately:** https://italian-medical-ai-4opjehvsybqncwjnaaq8a4.streamlit.app/
+
+### 2. 💻 Local Installation
+
+```bash
+# Clone the repository
+git clone [your-repo-url]
+cd italian_medical_ner
+
+# Install dependencies
+pip install -r requirements.txt
+
+# Run the Streamlit demo locally
+streamlit run web_demo_app.py
+
+# Or launch the GUI application
+python ner_gui_app.py
+```
+
+### 3. 🐳 Docker Deployment (Production Ready)
+
+```bash
+# Option 1: Docker Compose (Recommended)
+docker-compose up --build
+
+# Option 2: Use our launch script
+./docker-launch.bat
+
+# Access at http://localhost:8501
+```
+
+### 4. 🔌 API Service
+
+```bash
+# Start the API server
+python api_service.py
+
+# Test with curl
+curl -X POST "http://localhost:8000/predict" \
+     -H "Content-Type: application/json" \
+     -d '{"text": "Il paziente ha la febbre."}'
+```
+
+## 📚 Usage Examples
+
+### Simple Text Analysis
+
+```python
+# Try this text in the demo:
+text = "Il paziente presenta febbre alta e mal di testa. Prescritto paracetamolo 500mg."
+
+# Expected entities:
+# 🩺 paziente (PERSON)
+# 🔥 febbre alta (SYMPTOM) 
+# 🤕 mal di testa (SYMPTOM)
+# 💊 paracetamolo (MEDICATION)
+# 📏 500mg (DOSAGE)
+```
+
+### Medical Report Processing
+
+```python
+medical_report = """
+Radiografia del torace eseguita il 15/06/2025.
+Risultato: polmoni normoespansi, non versamenti pleurici.
+Consigliata terapia con antibiotico per 7 giorni.
+Controllo clinico tra una settimana.
+"""
+
+# Process through web demo or API
+# Expected: radiografia, torace, polmoni, antibiotico, terapia
+```
+
+## 📊 Performance Metrics
+
+| Metric | Original Model | Enhanced Pipeline |
+|--------|---------------|------------------|
+| Precision | 75.9% | **85.2%** |
+| Recall | 75.3% | **83.3%** |
+| F1-Score | 75.6% | **84.2%** |
+| Processing Speed | ~150ms | ~180ms |
+
 ## How to Use
 You can easily use this model with the Hugging Face `transformers` library. Here's an example of how to load and use the model for inference:
 

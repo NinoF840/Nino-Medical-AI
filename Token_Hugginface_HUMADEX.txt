@@ -1,0 +1,31 @@
+Hugging Face Token:
+[Your_Hugging_Face_Token]
+
+API Documentation:
+- [Summary of key points or features from your Hugging Face model]
+
+Usage Instructions:
+1. Install the Transformers library:
+   ```shell
+   pip install transformers
+   ```
+
+2. Authenticate using your token:
+   ```python
+   from huggingface_hub import login
+   login(token="[Your_Hugging_Face_Token]")
+   ```
+
+Example Code:
+```python
+from transformers import AutoModel, AutoTokenizer
+
+# Load the tokenizer and model
+tokenizer = AutoTokenizer.from_pretrained("nino58/nino-medical-ai")
+model = AutoModel.from_pretrained("nino58/nino-medical-ai")
+
+# Example usage
+inputs = tokenizer("Sample text", return_tensors="pt")
+outputs = model(**inputs)
+```
+

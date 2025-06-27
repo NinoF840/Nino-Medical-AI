@@ -1,0 +1,62 @@
+Subject: Inquiry Regarding Model Compliance and Procedures - nino58/nino-medical-ai
+
+Dear Hugging Face Support Team,
+
+I hope this email finds you well. I am writing to inquire about the necessary fulfillments, compliances, and procedures related to my model hosted on your platform.
+
+Model Details:
+- Model Name: nino-medical-ai
+- Username: nino58
+- Model URL: https://huggingface.co/nino58/nino-medical-ai
+- Domain: Medical AI/NER (Named Entity Recognition)
+
+I would like to understand:
+
+1. Compliance Requirements:
+   - What are the specific compliance requirements for medical AI models on Hugging Face?
+   - Are there any regulatory standards I need to adhere to?
+   - Do I need any special certifications or documentation?
+
+2. Model Validation and Review:
+   - What is the process for model validation on your platform?
+   - Are there any peer review procedures I should follow?
+   - How can I ensure my model meets your quality standards?
+
+3. Legal and Ethical Considerations:
+   - What are the terms of service specific to medical AI models?
+   - Are there any liability considerations I should be aware of?
+   - What ethical guidelines should I follow for medical AI applications?
+
+4. Documentation Requirements:
+   - What documentation should I provide for my model?
+   - Are there specific formats or templates I should use?
+   - How should I document the training data and methodology?
+
+5. Commercial Use and Licensing:
+   - What are the guidelines for commercial use of models hosted on Hugging Face?
+   - How should I structure my licensing terms?
+   - Are there any revenue sharing considerations?
+
+I am committed to ensuring that my model meets all necessary standards and contributes positively to the AI community. I would greatly appreciate your guidance on these matters.
+
+Please let me know if you need any additional information or if there are specific forms I need to complete.
+
+Thank you for your time and consideration. I look forward to your response.
+
+Best regards,
+Nino
+Email: nino58150@gmail.com
+Model: https://huggingface.co/nino58/nino-medical-ai
+Space: http://huggingface.co/spaces/nino58150/HUMADEX_NER_Italian_Medical_Text_Analysis
+
+---
+
+CONTACT INFORMATION FOR HUGGING FACE:
+- General Support: support@huggingface.co
+- Business/Enterprise: enterprise@huggingface.co
+- Legal/Compliance: legal@huggingface.co
+- Community: community@huggingface.co
+
+You can also reach out through:
+- Hugging Face Community Forum: https://discuss.huggingface.co/
+- GitHub Issues: https://github.com/huggingface/transformers/issues
