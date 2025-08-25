@@ -8,8 +8,8 @@ from typing import Dict, List, Optional
 
 # Configure page
 st.set_page_config(
-    page_title="Italian Medical NER - Professional Demo",
-    page_icon="🏥",
+    page_title="Nino Medical AI - Professional Demo",
+    page_icon="🩺",
     layout="wide",
     initial_sidebar_state="expanded"
 )
@@ -232,7 +232,7 @@ def main():
     # Header
     st.markdown("""
     <div class="demo-header">
-        <h1>🏥 Italian Medical NER - Professional Demo</h1>
+        <h1>🩺 Nino Medical AI - Professional Demo</h1>
         <p style="font-size: 1.2em; margin-top: 1rem;">
             Advanced AI-Powered Medical Entity Recognition for Italian Healthcare
         </p>
@@ -433,9 +433,9 @@ def main():
         # Contact information
         st.subheader("📞 Contact Information")
         st.markdown("""
-        **Email:** medical-ner@yourdomain.com  
-        **Phone:** +39 [Your Number]  
-        **LinkedIn:** [Your Profile]  
+        **Email:** nino58150@gmail.com / ninomedical.ai@gmail.com  
+        **Phone:** +39 3936789529  
+        **GitHub:** [@NinoF840](https://github.com/NinoF840)  
         
         **Response Time:** < 4 hours  
         **Demo Availability:** Same day  
@@ -453,7 +453,7 @@ def main():
     # Demo watermark
     st.markdown("""
     <div class="demo-watermark">
-        💻 Demo Version - Italian Medical NER<br>
+        💻 Demo Version - Nino Medical AI<br>
         © 2025 - Professional AI Solution
     </div>
     """, unsafe_allow_html=True)
