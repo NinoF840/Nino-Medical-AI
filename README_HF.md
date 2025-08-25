@@ -28,5 +28,6 @@ Inserisci un testo medico italiano e scopri le entità identificate dal modello!
 ## 👨‍💻 Sviluppatore
 
 **Nino** - AI Developer
-- GitHub: [@NinoF840](https://github.com/NinoF840)
-- Email: nino58150@gmail.com
+- 📧 Email: nino58150@gmail.com / ninomedical.ai@gmail.com
+- 📞 Tel: 3936789529
+- 🐙 GitHub: [@NinoF840](https://github.com/NinoF840)

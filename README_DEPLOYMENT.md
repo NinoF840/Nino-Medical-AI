@@ -51,7 +51,7 @@ Sistema avanzato di **Named Entity Recognition (NER)** specializzato per testi m
 ## 👨‍💻 Sviluppatore
 
 **Nino** - Sviluppatore AI & Medical NLP
-- 📧 Email: nino58150@gmail.com / ninomedical.ao@gmail.com
+- 📧 Email: nino58150@gmail.com / ninomedical.ai@gmail.com
 - 📞 Tel: 3936789529
 - 🐙 GitHub: [@NinoF840](https://github.com/NinoF840)
 
