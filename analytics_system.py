@@ -16,8 +16,46 @@ is strictly prohibited without the express written permission of Nino Medical AI
 import sqlite3
 import json
 import pandas as pd
-import matplotlib.pyplot as plt
-import seaborn as sns
+# Safe matplotlib imports with compatibility layer
+try:
+    import matplotlib.pyplot as plt
+    import seaborn as sns
+    MATPLOTLIB_AVAILABLE = True
+except ImportError as e:
+    print(f"Warning: matplotlib/seaborn not available: {e}")
+    MATPLOTLIB_AVAILABLE = False
+    # Create dummy classes to avoid import errors
+    class DummyPlt:
+        @staticmethod
+        def figure(*args, **kwargs): pass
+        @staticmethod
+        def plot(*args, **kwargs): pass
+        @staticmethod
+        def bar(*args, **kwargs): pass
+        @staticmethod
+        def title(*args, **kwargs): pass
+        @staticmethod
+        def xlabel(*args, **kwargs): pass
+        @staticmethod
+        def ylabel(*args, **kwargs): pass
+        @staticmethod
+        def xticks(*args, **kwargs): pass
+        @staticmethod
+        def grid(*args, **kwargs): pass
+        @staticmethod
+        def tight_layout(*args, **kwargs): pass
+        @staticmethod
+        def savefig(*args, **kwargs): pass
+        @staticmethod
+        def close(*args, **kwargs): pass
+        @staticmethod
+        def subplots(*args, **kwargs): return None, (None, None)
+        @staticmethod
+        def suptitle(*args, **kwargs): pass
+        style = type('Style', (), {'use': lambda x: None})()
+    
+    plt = DummyPlt()
+    sns = type('DummySns', (), {'set_palette': lambda x: None})()
 from datetime import datetime, timedelta
 import logging
 from typing import Dict, List, Any, Optional
@@ -458,8 +496,15 @@ Negative Feedback: {feedback_insights['feedback_summary'].get('negative_feedback
             os.makedirs(output_dir)
         
         # Set style
-        plt.style.use('seaborn-v0_8')
-        sns.set_palette("husl")
+        if MATPLOTLIB_AVAILABLE:
+            try:
+                plt.style.use('seaborn-v0_8')
+            except:
+                try:
+                    plt.style.use('seaborn')
+                except:
+                    pass  # Use default style
+            sns.set_palette("husl")
         
         conn = sqlite3.connect(self.db_path)
         
