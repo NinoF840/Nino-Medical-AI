@@ -1,5 +1,5 @@
 ---
-title: Italian Medical NER
+title: Nino Medical AI
 emoji: 🩺
 colorFrom: blue
 colorTo: green
@@ -10,7 +10,7 @@ pinned: false
 license: mit
 ---
 
-# 🩺 Italian Medical NER Demo
+# 🩺 Nino Medical AI Demo
 
 Sistema avanzato di Named Entity Recognition (NER) specializzato per testi medici in lingua italiana.
 

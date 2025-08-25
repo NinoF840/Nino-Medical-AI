@@ -1,4 +1,4 @@
-# 🚀 Guida Completa al Deployment - Italian Medical NER
+# 🚀 Guida Completa al Deployment - Nino Medical AI
 
 ## 📋 Opzioni di Deployment Disponibili
 

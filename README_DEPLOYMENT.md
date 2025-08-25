@@ -1,4 +1,4 @@
-# 🩺 Italian Medical NER - Streamlit Demo
+# 🩺 Nino Medical AI - Streamlit Demo
 
 [![Streamlit App](https://static.streamlit.io/badges/streamlit_badge_black_white.svg)](https://share.streamlit.io/ninof840/italian-medical-ner/main/web_demo_app.py)
 
@@ -8,7 +8,7 @@ Prova la demo online: **[Italian Medical NER Demo](https://share.streamlit.io/ni
 
 ## 📖 Descrizione
 
-Sistema avanzato di **Named Entity Recognition (NER)** specializzato per testi medici italiani. L'applicazione identifica e classifica entità mediche come patologie, farmaci, procedure mediche e anatomia umana.
+**Nino Medical AI** - Sistema avanzato di Named Entity Recognition (NER) specializzato per testi medici italiani. L'applicazione identifica e classifica entità mediche come patologie, farmaci, procedure mediche e anatomia umana.
 
 ## ✨ Caratteristiche Principali
 
